@@ -1,0 +1,13 @@
+.{
+    .name = .trex,
+    .version = "0.0.0",
+    .fingerprint = 0xd43832057730c6b4,
+    .minimum_zig_version = "0.15.2",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "trex.zig",
+        "LICENSE",
+        "README.md",
+    },
+}

@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  pull_request:
+    paths-ignore: [README.md]
+  push:
+    branches: [main]
+    paths-ignore: [README.md]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: mlugg/setup-zig@v2
+        with:
+          version: 0.15.2
+      - uses: taiki-e/install-action@just
+      - run: just check
